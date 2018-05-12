@@ -73,7 +73,6 @@ const findBuildOrder = (projects, dependencies) => {
     DFS(node);
   });
 
-  console.log(buildOrder.map(test => test.name));
   return buildOrder;
 };
 
@@ -83,3 +82,4 @@ const dependencies = [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c']
 
 findBuildOrder(projects, dependencies);
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
