@@ -24,6 +24,22 @@ const productArray = (arr) => {
   })
 }
 
+//With no extra space
+const productArray = nums => {
+  const n = nums.length;
+  const result = [1];
+  for (let i = 1; i < n; i++) {
+    result[i] = result[i-1] * nums[i-1];
+  }
+
+  let right = 1;
+  for (let i = n-1; i >= 0; i--) {
+    result[i] *= right;
+    right *= nums[i];
+  }
+  return result;
+}
+
 //Given an array of integers, find the first missing positive integer in linear time and constant space. In other words, find the lowest positive integer that does not exist in the array. The array can contain duplicates and negative numbers as well.
 const findNextPositive = (arr) => {
   if (!arr || !arr.length) return null;
