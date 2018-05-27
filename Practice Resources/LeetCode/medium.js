@@ -52,3 +52,25 @@ const addTwoNumbers = (l1, l2) => {
   }
   return node;
 };
+
+// 144. Binary Tree Preorder Traversal
+
+var preorderTraversal = function(root) {
+  const result = [];
+  if (!root) return result;
+  const stack = [root];
+  while (stack.length) {
+    const head = stack.pop();
+    let currentNode = head;
+    currentNode.visited = true;
+    result.push(currentNode.val);
+    while (currentNode) {
+      currentNode = currentNode.left;
+      if (currentNode && !currentNode.visited) {
+        currentNode.visited = true;
+        stack.push(currentNode);
+      }
+    }
+    if (head.right) stack.push(head.right);
+  }
+}
