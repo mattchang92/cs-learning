@@ -5,6 +5,7 @@ class Node {
   }
 }
 
+// Implementation with tail pointer
 class LinkedList {
   constructor(head) {
     this.head = head || null;
@@ -23,17 +24,17 @@ class LinkedList {
   }
 
   // O(1)
-  getSize() { 
-    return this.size
+  getSize() {
+    return this.size;
   }
-  empty() { 
-    return this.size === 0
+  empty() {
+    return this.size === 0;
   }
-  front() { 
-    return this.head.val
+  front() {
+    return this.head.val;
   }
-  back() { 
-    return this.tail.val
+  back() {
+    return this.tail.val;
   }
 
   // O(1)
@@ -54,7 +55,8 @@ class LinkedList {
   push_back(val) {
     this.size++;
     if (!this.head) {
-      this.head = this.tail = new Node(val);
+      this.head = new Node(val);
+      this.tail = this.head;
     } else {
       const node = new Node(val);
       this.tail.next = node;
@@ -101,7 +103,7 @@ class LinkedList {
 
   // O(n)
   value_n_from_end(n) {
-    let diff = this.size - n;
+    const diff = this.size - n;
     const node = this._getNodeAt(diff, 0);
     return node.val;
   }
@@ -116,7 +118,7 @@ class LinkedList {
         return;
       }
       pointer = pointer.next;
-      runner = runner.next;s
+      runner = runner.next;
     }
   }
 
@@ -145,3 +147,5 @@ class LinkedList {
     this.tail = pointer;
   }
 }
+
+module.exports = LinkedList;
