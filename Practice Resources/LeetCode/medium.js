@@ -56,8 +56,7 @@ const addTwoNumbers = (l1, l2) => {
 };
 
 // 144. Binary Tree Preorder Traversal
-
-const preorderTraversal = function (root) {
+const preorderTraversal = (root) => {
   const result = [];
   if (!root) return result;
   const stack = [root];

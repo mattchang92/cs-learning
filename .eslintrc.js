@@ -11,6 +11,7 @@ module.exports = {
       "guard-for-in": "off",
       "no-restricted-syntax": "off",
       "no-mixed-operators": "off",
-      "consistent-return": "off"
+      "consistent-return": "off",
+      "no-console": "off"
     }
 };

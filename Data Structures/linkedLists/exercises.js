@@ -22,7 +22,7 @@ const removeDupes = (head) => {
   return head;
 };
 // For a sorted list
-const deleteDuplicates = function (head) {
+const deleteDuplicates = (head) => {
   if (!head || !head.next) return head;
   head.next = deleteDuplicates(head.next);
   return head.val === head.next.val ? head.next : head;
