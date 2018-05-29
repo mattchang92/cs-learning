@@ -1,8 +1,9 @@
-//Implement a binary tree with insert, find, delete and getRandomNode
+// Implement a binary tree with insert, find, delete and getRandomNode
 class BinaryTreeNode {
   constructor() {
     this.val = null;
-    this.left = this.right = null;
+    this.left = null;
+    this.right = null;
   }
 
   find(val) {
@@ -16,12 +17,10 @@ class BinaryTreeNode {
       } else {
         this.insert(this.left);
       }
+    } else if (!this.right) {
+      this.right = new BinaryTreeNode(val);
     } else {
-      if (!this.right) {
-        this.right = new BinaryTreeNode(val);
-      } else {
-        this.insert(this.right);
-      }
+      this.insert(this.right);
     }
   }
 
@@ -29,8 +28,8 @@ class BinaryTreeNode {
     const nodes = this._doublePointerSearch(val);
     const parent = nodes.pointer1;
     const node = nodes.pointer2;
-    const direction = val < parent.val ? 'left': 'right';
-    
+    const direction = val < parent.val ? 'left' : 'right';
+
     if (!node.left) {
       parent[direction] = node.right;
     } else if (!node.right) {
@@ -44,7 +43,7 @@ class BinaryTreeNode {
         smallestRightNode = smallestRightNode.left;
         smallestNodeParent = smallestNodeParent.left;
       }
-      
+
       if (smallestRightNode) {
         const newNode = new BinaryTreeNode(smallestRightNode.val);
         newNode.left = node.left;
@@ -62,7 +61,7 @@ class BinaryTreeNode {
     let randomNode;
     let numNodes = 1;
 
-    const DFS = node => {
+    const DFS = (node) => {
       if (!node) return;
       if (Math.floor(Math.random() * numNodes) === 0) {
         randomNode = node;
@@ -71,7 +70,7 @@ class BinaryTreeNode {
       numNodes++;
       DFS(node.left);
       DFS(node.right);
-    }
+    };
     return randomNode;
   }
 
@@ -85,14 +84,18 @@ class BinaryTreeNode {
   }
 
   _doublePointerSearch(val) {
-    let pointer1, pointer2;
+    let pointer1;
+    let pointer2;
 
-    const search = node => {
+    const search = (node) => {
       if (!node) return null;
-      if (node.val === val) return pointer2 = node;
+      if (node.val === val) {
+        pointer2 = node;
+        return;
+      }
 
       const nodeToSearch = val < node.val ? node.left : node.right;
-      if (search(nodeToSearch)) pointer1 = node;      
+      if (search(nodeToSearch)) pointer1 = node;
     };
 
     search(this);

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 // 4.7 CtCI Build Order
 // Solving using DFS - assuming no cycles as per the question
 const STATUS = {
@@ -40,11 +42,11 @@ class Graph {
 const buildGraph = (projects, dependencies) => {
   const graph = new Graph();
 
-  projects.forEach(name => {
+  projects.forEach((name) => {
     graph.getOrAddNode(name);
   });
 
-  dependencies.forEach(dep => {
+  dependencies.forEach((dep) => {
     const dependency = graph.getOrAddNode(dep[0]);
     const dependentProject = graph.getOrAddNode(dep[1]);
 
@@ -60,16 +62,16 @@ const findBuildOrder = (projects, dependencies) => {
 
   const DFS = (node) => {
     if (node.status === STATUS.NEW) {
-      node.neighbours.forEach(neighbourNode => {
+      node.neighbours.forEach((neighbourNode) => {
         DFS(neighbourNode);
       });
-      
+
       node.status = STATUS.COMPLETE;
       buildOrder.unshift(node);
     }
-  }
+  };
 
-  graph.nodes.forEach(node => {
+  graph.nodes.forEach((node) => {
     DFS(node);
   });
 

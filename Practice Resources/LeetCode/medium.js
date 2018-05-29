@@ -1,4 +1,7 @@
-// Add two numbers given in the form of a linked list with the most significant digit as the head. Return the number as a linked list
+const Node = require('../../dataStructures').TreeNode;
+
+/* Add two numbers given in the form of a linked list with the most
+significant digit as the head. Return the number as a linked list */
 const addTwoNumbers = (l1, l2) => {
   const listLength = (list) => {
     if (!list.next) return 1;
@@ -7,7 +10,7 @@ const addTwoNumbers = (l1, l2) => {
 
   const padZeroes = (list, levels) => {
     if (levels === 0) return list;
-    const newHead = new ListNode(0);
+    const newHead = new Node(0);
     newHead.next = list;
     return padZeroes(newHead, levels - 1);
   };
@@ -32,21 +35,20 @@ const addTwoNumbers = (l1, l2) => {
     const result = addNumbers(list1.next, list2.next);
     const sum = list1.val + list2.val + result.carry;
     const carry = Math.floor(sum / 10);
-    const node = new ListNode(sum % 10);
+    const node = new Node(sum % 10);
     node.next = result.node;
 
     return {
-      node: node,
-      carry: carry,
-    }
-  }
+      node,
+      carry,
+    };
+  };
 
   const result = addNumbers(longList, shortList);
-  const node = result.node;
-  const carry = result.carry;
+  const { node, carry } = result;
 
   if (carry) {
-    const carriedHead = new ListNode(1);
+    const carriedHead = new Node(1);
     carriedHead.next = node;
     return carriedHead;
   }
@@ -55,7 +57,7 @@ const addTwoNumbers = (l1, l2) => {
 
 // 144. Binary Tree Preorder Traversal
 
-var preorderTraversal = function(root) {
+const preorderTraversal = function (root) {
   const result = [];
   if (!root) return result;
   const stack = [root];
@@ -73,4 +75,5 @@ var preorderTraversal = function(root) {
     }
     if (head.right) stack.push(head.right);
   }
-}
+};
+

@@ -8,11 +8,11 @@ const buildTreePreOrder = (values, maxDepth, depth = 1) => {
   if (!values || !values.length || depth > maxDepth) return null;
   const head = new TreeNode(values.shift());
 
-  head.left = preOrderBuildTree(values, maxDepth, depth + 1);
-  head.right = preOrderBuildTree(values, maxDepth, depth + 1);
-  
+  head.left = buildTreePreOrder(values, maxDepth, depth + 1);
+  head.right = buildTreePreOrder(values, maxDepth, depth + 1);
+
   return head;
-}
+};
 
 const buildTreeInOrder = (values, maxDepth, depth = 1) => {
   if (!maxDepth) maxDepth = Math.ceil(Math.log2(values.length));
@@ -20,9 +20,9 @@ const buildTreeInOrder = (values, maxDepth, depth = 1) => {
 
   const head = new TreeNode();
 
-  head.left = preOrderBuildTree(values, maxDepth, depth + 1);
+  head.left = buildTreeInOrder(values, maxDepth, depth + 1);
   head.val = values.shift();
-  head.right = preOrderBuildTree(values, maxDepth, depth + 1);
-  
+  head.right = buildTreeInOrder(values, maxDepth, depth + 1);
+
   return head;
-}
+};

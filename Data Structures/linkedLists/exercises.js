@@ -1,10 +1,13 @@
+/* eslint-disable max-len */
+const Node = require('../../dataStructures').TreeNode;
+
 // 2.1 CtCI Remove Dupes from Unsorted Linked List (how to solve without using extra space?)
 const removeDupes = (head) => {
   if (!head) return null;
   if (!head.next) return head;
 
   const consumedValues = {};
-  let pointer = null;
+  const pointer = null;
   let runner = head;
   while (runner) {
     if (!consumedValues[runner.val]) {
@@ -17,9 +20,9 @@ const removeDupes = (head) => {
   }
 
   return head;
-}
+};
 // For a sorted list
-var deleteDuplicates = function (head) {
+const deleteDuplicates = function (head) {
   if (!head || !head.next) return head;
   head.next = deleteDuplicates(head.next);
   return head.val === head.next.val ? head.next : head;
@@ -44,15 +47,15 @@ const findNLastNode = (head, n) => {
     }
   }
   return pointer;
-}
+};
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 // 2.4 CtCI Partition a linked list around a value
 const partitionList = (head, val) => {
   if (!head || !head.next) return head;
-  let leftHead = new Node();
-  let rightHead = new Node();
+  const leftHead = new Node();
+  const rightHead = new Node();
   let leftRunner = leftHead;
   let rightRunner = rightHead;
 
@@ -64,19 +67,17 @@ const partitionList = (head, val) => {
       } else {
         rightHead.val = head.val;
       }
+    } else if (leftHead.val) {
+      leftRunner.next = new Node(head.val);
+      leftRunner = leftRunner.next;
     } else {
-      if (leftHead.val) {
-        leftRunner.next = new Node(head.val);
-        leftRunner = leftRunner.next;
-      } else {
-        leftHead.val = head.val;
-      }
+      leftHead.val = head.val;
     }
   }
 
   leftRunner.next = rightHead;
   return leftHead;
-}
+};
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -85,7 +86,7 @@ const sumList = (l1, l2) => {
   const listToInt = (node, level = 0) => {
     if (!node) return 0;
     return (node.val * (10 ** level)) + listToInt(node.next, level + 1);
-  }
+  };
 
   const sum = listToInt(l1) + listToInt(l2);
 
@@ -95,30 +96,30 @@ const sumList = (l1, l2) => {
     node.next = numToList(Math.floor(num / 10));
 
     return node;
-  }
+  };
 
   return numToList(sum);
-}
+};
 // Sum list forwards (can be easily implemented with a stack)
 const forwardsListSum = (l1, l2) => {
   const listLength = (list) => {
     if (!list.next) return 1;
     return 1 + listLength(list.next);
   };
-  
+
   const padZeroes = (list, levels) => {
     if (levels === 0) return list;
-    const newHead = new ListNode(0);
+    const newHead = new Node(0);
     newHead.next = list;
     return padZeroes(newHead, levels - 1);
-  }
-  
+  };
+
   const length1 = listLength(l1);
   const length2 = listLength(l2);
   const diff = Math.abs(length1 - length2);
   let shortList;
   let longList;
-  
+
   if (length1 > length2) {
     longList = l1;
     shortList = padZeroes(l2, diff);
@@ -126,33 +127,32 @@ const forwardsListSum = (l1, l2) => {
     longList = l2;
     shortList = padZeroes(l1, diff);
   }
-  
+
   const addNumbers = (list1, list2) => {
     if (!list1 || !list2) return { node: null, carry: 0 };
-  
+
     const result = addNumbers(list1.next, list2.next);
     const sum = list1.val + list2.val + result.carry;
     const carry = Math.floor(sum / 10);
-    const node = new ListNode(sum % 10);
+    const node = new Node(sum % 10);
     node.next = result.node;
-    console.log(result.carry)
+    console.log(result.carry);
     return {
-      node: node,
-      carry: carry,
-    }
-  }
-  
+      node,
+      carry,
+    };
+  };
+
   const result = addNumbers(longList, shortList);
-  const node = result.node;
-  const carry = result.carry;
-  
+  const { node, carry } = result;
+
   if (carry) {
-    const carriedHead = new ListNode(1);
+    const carriedHead = new Node(1);
     carriedHead.next = node;
     return carriedHead;
   }
   return node;
-}
+};
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -161,7 +161,7 @@ const isPalindrome = (head) => {
   if (!head || !head.next) return true;
   let pointer = head;
 
-  let values = [];
+  const values = [];
   while (pointer) {
     values.push(pointer.val);
     pointer = pointer.next;
@@ -184,7 +184,7 @@ const getIntersectionNode = (headA, headB) => {
   const listLength = (list) => {
     if (!list.next) return 1;
     return 1 + listLength(list.next);
-  }
+  };
 
   const aLength = listLength(headA);
   const bLength = listLength(headB);
@@ -215,5 +215,4 @@ const getIntersectionNode = (headA, headB) => {
   }
 
   return null;
-
 };
