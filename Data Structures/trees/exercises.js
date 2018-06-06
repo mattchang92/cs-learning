@@ -1,4 +1,6 @@
 // Preorder traversal
+// Pop and process a node immediately then push the children into the stack
+
 const preorderTraversal = (root) => {
   const values = [];
   if (!root) return values;
@@ -15,6 +17,9 @@ const preorderTraversal = (root) => {
 };
 
 // Inorder traversal
+
+// Have a currentNode pointer and traverse to the left most leaf before you pop a node
+// Push node value into result and set currentNode to right node
 const inorderTraversal = (root) => {
   const values = [];
   const stack = [];
@@ -33,7 +38,7 @@ const inorderTraversal = (root) => {
   return values;
 };
 
-
+// Neat trick, follow steps are preorder traversal but flip left/right order and reverse result at the end
 const postOrderTraversal = (root) => {
   const values = [];
   if (!root) return values;
@@ -47,6 +52,8 @@ const postOrderTraversal = (root) => {
   return values.reverse();
 };
 
+// Have 2 stacks, one to traverse the tree and another to hold the nodes in the proper order
+// Go with the proper order (not flipped) when filling stack1 since stack2 will reverse the order
 const postOrderTraversalAlt = (root) => {
   const values = [];
   if (!root) return values;
