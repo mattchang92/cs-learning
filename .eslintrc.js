@@ -12,6 +12,7 @@ module.exports = {
       "no-restricted-syntax": "off",
       "no-mixed-operators": "off",
       "consistent-return": "off",
-      "no-console": "off"
+      "no-console": "off",
+      "no-continue": 'off'
     }
 };
