@@ -1,7 +1,8 @@
 // Implement a binary tree with insert, find, delete and getRandomNode
 class BinaryTreeNode {
-  constructor() {
-    this.val = null;
+  constructor(val, parent) {
+    this.val = val || null;
+    this.parent = parent || null;
     this.left = null;
     this.right = null;
   }
@@ -10,50 +11,58 @@ class BinaryTreeNode {
     return this._binarySearch(val);
   }
 
+  minimum() {
+    let node = this;
+    while (node.left) {
+      node = node.left;
+    }
+    return node;
+  }
+
+  maximum() {
+    let node = this;
+    while (node.right) {
+      node = node.right;
+    }
+    return node;
+  }
+
   insert(val) {
-    if (val <= this.val) {
-      if (!this.left) {
-        this.left = new BinaryTreeNode(val);
+    let pointer = this;
+    let parent;
+    while (pointer) {
+      parent = pointer;
+      if (val < pointer.val) {
+        pointer = pointer.left;
       } else {
-        this.insert(this.left);
+        pointer = pointer.right;
       }
-    } else if (!this.right) {
-      this.right = new BinaryTreeNode(val);
+    }
+
+    const node = new BinaryTreeNode(val, parent);
+    if (val < parent.val) {
+      parent.left = node;
     } else {
-      this.insert(this.right);
+      parent.right = node;
     }
   }
 
   remove(val) {
-    const nodes = this._doublePointerSearch(val);
-    const parent = nodes.pointer1;
-    const node = nodes.pointer2;
-    const direction = val < parent.val ? 'left' : 'right';
-
+    const node = this._binarySearch(val);
     if (!node.left) {
-      parent[direction] = node.right;
+      this._transplant(node, node.right);
     } else if (!node.right) {
-      parent[direction] = node.left;
-    } else if (!node.left && !node.right) {
-      parent[direction] = null;
+      this._transplant(node, node.left);
     } else {
-      let smallestRightNode = node.right.left;
-      let smallestNodeParent = node.right;
-      while (smallestRightNode) {
-        smallestRightNode = smallestRightNode.left;
-        smallestNodeParent = smallestNodeParent.left;
+      const nextMin = this.minimum(node.right);
+      if (nextMin.parent !== node) {
+        this._transplant(nextMin, nextMin.right);
+        nextMin.right = node.right;
+        nextMin.right.parent = nextMin;
       }
-
-      if (smallestRightNode) {
-        const newNode = new BinaryTreeNode(smallestRightNode.val);
-        newNode.left = node.left;
-        newNode.right = node.right;
-        smallestNodeParent.left = null;
-        parent[direction] = newNode;
-      } else {
-        smallestNodeParent.left = node.left;
-        parent[direction] = smallestNodeParent;
-      }
+      this._transplant(node, nextMin);
+      nextMin.left = node.left;
+      nextMin.left.parent = nextMin;
     }
   }
 
@@ -83,23 +92,21 @@ class BinaryTreeNode {
     return null;
   }
 
-  _doublePointerSearch(val) {
-    let pointer1;
-    let pointer2;
-
-    const search = (node) => {
-      if (!node) return null;
-      if (node.val === val) {
-        pointer2 = node;
-        return;
-      }
-
-      const nodeToSearch = val < node.val ? node.left : node.right;
-      if (search(nodeToSearch)) pointer1 = node;
-    };
-
-    search(this);
-    return { pointer1, pointer2 };
+  _transplant(node1, node2 = null) {
+    if (node1 === node1.parent.left) {
+      node1.parent.left = node2;
+    } else {
+      node1.parent.right = node2;
+    }
+    if (node2) node2.parent = node1.parent;
   }
 }
+
+
+const { printInOrder } = require('../../Test/helpers');
+const { createBalancedBinaryTree } = require('../../Test/setup');
+
+const tree = createBalancedBinaryTree(BinaryTreeNode);
+console.log(tree);
+console.log(printInOrder(tree));
 
