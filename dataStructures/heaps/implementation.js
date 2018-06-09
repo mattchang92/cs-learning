@@ -27,18 +27,6 @@ const buildMaxHeap = (arr) => {
   return arr;
 };
 
-const heapSort = (arr) => {
-  buildMaxHeap(arr);
-  for (let i = arr.length - 1; i >= 2; i--) {
-    const temp = arr[1];
-    arr[1] = arr[i];
-    arr[i] = temp;
-    arr[0]--;
-    maxHeapify(arr, 1);
-  }
-  return arr.slice(1);
-};
-
 const heapExtractMax = (arr) => {
   if (arr[0] < 1) throw new Error('Heap underflow');
   const max = arr[1];

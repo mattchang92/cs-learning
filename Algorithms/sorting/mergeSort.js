@@ -1,7 +1,6 @@
 // Merge sort O(n log n) or O(1) if n <= c
-/* Divide and conquer, recursively. Keeps splitting array in half until array of length 1 is
-achieved (already sorted). Then work your way backwards through the stacking merging the split
-arrays since the by this time the subarrays have already been sorted. */
+/* Does not sort in place and so incurs extra memory use. However, the divide and conquer
+nature makes it useful with large datasets that don't fit into memory */
 const merge = (arr1, arr2) => {
   const mergedArr = [];
   while (arr1.length && arr2.length) {
