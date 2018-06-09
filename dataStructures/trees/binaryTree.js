@@ -103,10 +103,11 @@ class BinaryTreeNode {
 }
 
 
-const { printInOrder } = require('../../Test/helpers');
-const { createBalancedBinaryTree } = require('../../Test/setup');
+const { printInOrder } = require('../../test/helpers');
+const { createBalancedBinaryTree } = require('../../test/setup');
 
 const tree = createBalancedBinaryTree(BinaryTreeNode);
 console.log(tree);
 console.log(printInOrder(tree));
 
+module.exports = BinaryTreeNode;

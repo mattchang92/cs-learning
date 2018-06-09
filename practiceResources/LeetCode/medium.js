@@ -1,4 +1,4 @@
-const Node = require('../../dataStructures').TreeNode;
+const Node = require('../../dataStructures/trees/binaryTree');
 
 /* Add two numbers given in the form of a linked list with the most
 significant digit as the head. Return the number as a linked list */

@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const Node = require('../../dataStructures').TreeNode;
+const Node = require('../trees/binaryTree');
 
 // 2.1 CtCI Remove Dupes from Unsorted Linked List (how to solve without using extra space?)
 const removeDupes = (head) => {

@@ -1,4 +1,4 @@
-const { TreeNode } = require('../../dataStructures');
+const { TreeNode } = require('../../dataStructures/trees/binaryTree');
 
 const preOrderInput = ['a', 'b', 'd', 'e', 'c', 'f', 'g'];
 const inOrderInput = ['d', 'b', 'e', 'a', 'f', 'c', 'g'];
