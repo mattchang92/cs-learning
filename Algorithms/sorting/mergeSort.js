@@ -1,6 +1,7 @@
 // Merge sort O(n log n) or O(1) if n <= c
 /* Does not sort in place and so incurs extra memory use. However, the divide and conquer
-nature makes it useful with large datasets that don't fit into memory */
+nature makes it useful with large datasets that don't fit into memory. Only O (N log N)
+stable sort  */
 const merge = (arr1, arr2) => {
   const mergedArr = [];
   while (arr1.length && arr2.length) {
