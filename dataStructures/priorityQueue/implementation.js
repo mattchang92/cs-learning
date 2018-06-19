@@ -1,11 +1,13 @@
 const Node = require('../trees/basicNode');
 
+// Note: node implementation much more expensive memory wise
 class PriorityQueueNode {
   constructor(values) {
     this.heap = [0];
     if (values) this.buildHeap(values);
   }
 
+  // O(log N)
   insert(value) {
     const node = new Node(value);
     this.heap[0]++;
@@ -20,10 +22,12 @@ class PriorityQueueNode {
     }
   }
 
+  // O(N log N)
   buildHeap(values) {
     values.forEach(value => this.insert(value));
   }
 
+  // O(log N)
   heapify(i) {
     const left = i * 2;
     const right = (i * 2) + 1;
@@ -37,6 +41,17 @@ class PriorityQueueNode {
       this.heap[largest] = temp;
       this.heapify(largest);
     }
+  }
+
+  // O(log N)
+  extractTop() {
+    const heapSize = this.heap[0];
+    if (heapSize < 1) throw new Error('Error: heap underflow');
+    const node = this.heap[1];
+    this.heap[1] = this.heap[heapSize];
+    this.heap[0]--;
+    this.heapify(1);
+    return node;
   }
 }
 
