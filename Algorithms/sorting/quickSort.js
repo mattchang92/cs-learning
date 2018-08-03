@@ -1,4 +1,4 @@
-/* Requires more memory in the form os stack space due to its recursive nature
+/* Requires more memory in the form of stack space due to its recursive nature
 Generally faster because its constant factors are smaller than other sorting
 algorithms (partitioning is fast) Useful when you care more about average
 case performance but not about stability */
@@ -22,7 +22,7 @@ const partition = (arr, leftIndex, rightIndex) => {
   }
 
   swap(arr, leftIndex, partitionIndex - 1);
-  return partitionIndex;
+  return partitionIndex - 1;
 };
 
 const quickSort = (arr, leftIndex, rightIndex) => {
