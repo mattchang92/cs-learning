@@ -31,10 +31,8 @@ const findPermutations = (string) => {
 
   const singleCharPermutate = (str, char) => {
     const permutations = [];
-    permutations.push(char.concat(str));
-    permutations.push(str.concat(char));
 
-    for (let i = 1; i < str.length; i++) {
+    for (let i = 0; i <= str.length; i++) {
       permutations.push(str.substr(0, i).concat(char).concat(str.substr(i)));
     }
 
