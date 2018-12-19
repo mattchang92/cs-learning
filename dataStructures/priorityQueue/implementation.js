@@ -22,9 +22,17 @@ class PriorityQueueNode {
     }
   }
 
-  // O(N log N)
+  // O(N log N) sift up
   buildHeap(values) {
     values.forEach(value => this.insert(value));
+  }
+
+  // O(N) sift down
+  linearBuildHeap(values) {
+    this.heap = [values.length].concat(values);
+    for (let i = this.heap.length / 2; i > 0; i--) {
+      this.heapify(i);
+    }
   }
 
   // O(log N)
