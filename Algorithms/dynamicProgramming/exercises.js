@@ -12,8 +12,6 @@ const howManyPaths = (steps, memo = []) => {
   return memo[steps - 3] + memo[steps - 2] + memo[steps - 1];
 };
 
-// const test = howManyPaths(100);
-
 const bookAnswer = (steps, memo = []) => {
   if (steps < 0) {
     return 0;
